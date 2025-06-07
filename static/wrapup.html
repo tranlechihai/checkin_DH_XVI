@@ -45,21 +45,28 @@
             p {
                 margin-top: 10px;
             }
+
+            .export-btn {
+                padding: 10px 20px;
+                background-color: #2a4d9b;
+                color: white;
+                border: none;
+                border-radius: 6px;
+                font-size: 16px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+            .export-btn:hover {
+                background-color: #1a3570;
+            }
         </style>
     </head>
     <body>
         <h1>THỐNG KÊ PHIÊN 1<br>ĐẠI HỘI ĐẠI BIỂU XVI</br></h1>
 
-        <div style="text-align: right; margin-bottom: 10px;">
-        <form action="/api/export_wrapup" method="get">
-            <button type="submit" style="padding: 8px 12px; background-color: #2a4d9b; color: white; border: none; border-radius: 4px;">
-            Xuất phiếu thống kê
-            </button>
-        </form>
-        </div>
-
         <h2 style="color: #b22222; font-size: 20px;">
-            Tổng số đại biểu đã điểm danh: 2 / 107 (1.9%)
+            Tổng số đại biểu đã điểm danh: 16 / 107 (15.0%)
         </h2>
 
         <h2>Giới tính</h2>
@@ -74,7 +81,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr><td>Nam</td><td style='text-align:center'>1</td><td style='text-align:center'>50.0%</td></tr><tr><td>Nữ</td><td style='text-align:center'>1</td><td style='text-align:center'>50.0%</td></tr>
+                <tr><td>Nam</td><td style='text-align:center'>11</td><td style='text-align:center'>68.8%</td></tr><tr><td>Nữ</td><td style='text-align:center'>5</td><td style='text-align:center'>31.2%</td></tr>
             </tbody>
         </table>
         
@@ -92,7 +99,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr><td>Ủy viên Ban Chấp hành Đảng bộ</td><td style='text-align:center'>1</td><td style='text-align:center'>50.0%</td></tr><tr><td>Cấp ủy các chi bộ trực thuộc</td><td style='text-align:center'>1</td><td style='text-align:center'>50.0%</td></tr><tr><td>Không</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr>
+                <tr><td>Ủy viên Ban Chấp hành Đảng bộ</td><td style='text-align:center'>13</td><td style='text-align:center'>81.2%</td></tr><tr><td>Cấp ủy các chi bộ trực thuộc</td><td style='text-align:center'>3</td><td style='text-align:center'>18.8%</td></tr><tr><td>Không</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr>
             </tbody>
         </table>
         
@@ -110,7 +117,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr><td>Lãnh đạo trường</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr><tr><td>Lãnh đạo phòng, khoa và tương đương</td><td style='text-align:center'>2</td><td style='text-align:center'>100.0%</td></tr><tr><td>Không</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr>
+                <tr><td>Lãnh đạo trường</td><td style='text-align:center'>5</td><td style='text-align:center'>31.2%</td></tr><tr><td>Lãnh đạo phòng, khoa và tương đương</td><td style='text-align:center'>11</td><td style='text-align:center'>68.8%</td></tr><tr><td>Không</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr>
             </tbody>
         </table>
         
@@ -128,7 +135,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr><td>Sinh viên</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr><tr><td>Đại học</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr><tr><td>Thạc sĩ</td><td style='text-align:center'>1</td><td style='text-align:center'>50.0%</td></tr><tr><td>Tiến sĩ</td><td style='text-align:center'>1</td><td style='text-align:center'>50.0%</td></tr><tr><td>Phó Giáo sư, Tiến sĩ</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr><tr><td>Giáo sư, Tiến sĩ</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr>
+                <tr><td>Sinh viên</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr><tr><td>Đại học</td><td style='text-align:center'>2</td><td style='text-align:center'>12.5%</td></tr><tr><td>Thạc sĩ</td><td style='text-align:center'>4</td><td style='text-align:center'>25.0%</td></tr><tr><td>Tiến sĩ</td><td style='text-align:center'>8</td><td style='text-align:center'>50.0%</td></tr><tr><td>Phó Giáo sư, Tiến sĩ</td><td style='text-align:center'>1</td><td style='text-align:center'>6.2%</td></tr><tr><td>Giáo sư, Tiến sĩ</td><td style='text-align:center'>1</td><td style='text-align:center'>6.2%</td></tr>
             </tbody>
         </table>
         
@@ -146,7 +153,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr><td>Cao cấp</td><td style='text-align:center'>1</td><td style='text-align:center'>50.0%</td></tr><tr><td>Trung cấp</td><td style='text-align:center'>1</td><td style='text-align:center'>50.0%</td></tr><tr><td>Đang học Trung cấp</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr><tr><td>Chưa qua đào tạo</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr>
+                <tr><td>Cao cấp</td><td style='text-align:center'>12</td><td style='text-align:center'>75.0%</td></tr><tr><td>Trung cấp</td><td style='text-align:center'>4</td><td style='text-align:center'>25.0%</td></tr><tr><td>Đang học Trung cấp</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr><tr><td>Chưa qua đào tạo</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr>
             </tbody>
         </table>
         
@@ -164,19 +171,31 @@
                 </tr>
             </thead>
             <tbody>
-                <tr><td>Dưới 40 tuổi</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr><tr><td>Từ 40 đến 50 tuổi</td><td style='text-align:center'>2</td><td style='text-align:center'>100.0%</td></tr><tr><td>Từ 51 đến 60 tuổi</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr><tr><td>Trên 60 tuổi</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr>
+                <tr><td>Dưới 40 tuổi</td><td style='text-align:center'>2</td><td style='text-align:center'>12.5%</td></tr><tr><td>Từ 40 đến 50 tuổi</td><td style='text-align:center'>11</td><td style='text-align:center'>68.8%</td></tr><tr><td>Từ 51 đến 60 tuổi</td><td style='text-align:center'>3</td><td style='text-align:center'>18.8%</td></tr><tr><td>Trên 60 tuổi</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr>
             </tbody>
         </table>
         
         </ul>
 
         <h2>Tuổi đời</h2>
-        <p>Đồng chí lớn tuổi nhất: <strong>Nguyễn Ngọc Hưng</strong> (43 năm 9 tháng 6 ngày)</p>
-        <p>Đồng chí trẻ tuổi nhất: <strong>Phạm Thị Thu Thủy</strong> (41 năm 5 tháng 30 ngày)</p>
+        <p>Đồng chí lớn tuổi nhất: <strong>Võ Thị Hồng Trước</strong> (54 năm 1 tháng 15 ngày)</p>
+        <p>Đồng chí trẻ tuổi nhất: <strong>Nguyễn Vũ Hoài Ân</strong> (30 năm 4 tháng 6 ngày)</p>
 
         <h2>Tuổi Đảng</h2>
-        <p>Đồng chí có tuổi Đảng cao nhất: <strong>Nguyễn Ngọc Hưng</strong> (18 năm 6 tháng 5 ngày)</p>
-        <p>Đồng chí có tuổi Đảng thấp nhất: <strong>Phạm Thị Thu Thủy</strong> (16 năm 5 tháng 8 ngày)</p>
+        <p>Đồng chí có tuổi Đảng cao nhất: <strong>Nguyễn Tiến Công</strong> (25 năm 1 tháng 9 ngày)</p>
+        <p>Đồng chí có tuổi Đảng thấp nhất: <strong>Nguyễn Vũ Hoài Ân</strong> (8 năm 0 tháng 3 ngày)</p>
+    
+        <div style="text-align: center; margin-top: 40px;">
+            <form action="/api/export_wrapup_pdf" method="get">
+                <button type="submit" class="export-btn">Xuất phiếu thống kê</button>
+            </form>
+        </div>
+
+        <script>
+            setInterval(() => {
+                location.reload();
+            }, 10000); 
+        </script>
     </body>
     </html>
     

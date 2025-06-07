@@ -12,7 +12,7 @@
     "Chuc_vu_chinh_quyen": "Lãnh đạo trường",
     "trinh_do_chuyen_mon": "Tiến sĩ",
     "trinh_do_ly_luan_chinh_tri": "Cao cấp",
-    "check_up": false
+    "check_up": true
   },
   {
     "ma_dai_bieu": "DN.002",
@@ -27,7 +27,7 @@
     "Chuc_vu_chinh_quyen": "Lãnh đạo trường",
     "trinh_do_chuyen_mon": "Giáo sư, Tiến sĩ",
     "trinh_do_ly_luan_chinh_tri": "Cao cấp",
-    "check_up": false
+    "check_up": true
   },
   {
     "ma_dai_bieu": "DN.003",
@@ -42,7 +42,7 @@
     "Chuc_vu_chinh_quyen": "Lãnh đạo trường",
     "trinh_do_chuyen_mon": "Thạc sĩ",
     "trinh_do_ly_luan_chinh_tri": "Cao cấp",
-    "check_up": false
+    "check_up": true
   },
   {
     "ma_dai_bieu": "DN.004",
@@ -57,7 +57,7 @@
     "Chuc_vu_chinh_quyen": "Lãnh đạo phòng, khoa và tương đương",
     "trinh_do_chuyen_mon": "Phó Giáo sư, Tiến sĩ",
     "trinh_do_ly_luan_chinh_tri": "Cao cấp",
-    "check_up": false
+    "check_up": true
   },
   {
     "ma_dai_bieu": "DN.005",
@@ -72,7 +72,7 @@
     "Chuc_vu_chinh_quyen": "Lãnh đạo trường",
     "trinh_do_chuyen_mon": "Tiến sĩ",
     "trinh_do_ly_luan_chinh_tri": "Cao cấp",
-    "check_up": false
+    "check_up": true
   },
   {
     "ma_dai_bieu": "DN.006",
@@ -87,7 +87,7 @@
     "Chuc_vu_chinh_quyen": "Lãnh đạo trường",
     "trinh_do_chuyen_mon": "Tiến sĩ",
     "trinh_do_ly_luan_chinh_tri": "Cao cấp",
-    "check_up": false
+    "check_up": true
   },
   {
     "ma_dai_bieu": "DN.007",
@@ -102,7 +102,7 @@
     "Chuc_vu_chinh_quyen": "Lãnh đạo phòng, khoa và tương đương",
     "trinh_do_chuyen_mon": "Tiến sĩ",
     "trinh_do_ly_luan_chinh_tri": "Cao cấp",
-    "check_up": false
+    "check_up": true
   },
   {
     "ma_dai_bieu": "DN.008",
@@ -132,7 +132,7 @@
     "Chuc_vu_chinh_quyen": "Lãnh đạo phòng, khoa và tương đương",
     "trinh_do_chuyen_mon": "Tiến sĩ",
     "trinh_do_ly_luan_chinh_tri": "Cao cấp",
-    "check_up": false
+    "check_up": true
   },
   {
     "ma_dai_bieu": "DN.010",
@@ -147,7 +147,7 @@
     "Chuc_vu_chinh_quyen": "Lãnh đạo phòng, khoa và tương đương",
     "trinh_do_chuyen_mon": "Tiến sĩ",
     "trinh_do_ly_luan_chinh_tri": "Cao cấp",
-    "check_up": false
+    "check_up": true
   },
   {
     "ma_dai_bieu": "DN.011",
@@ -162,7 +162,7 @@
     "Chuc_vu_chinh_quyen": "Lãnh đạo phòng, khoa và tương đương",
     "trinh_do_chuyen_mon": "Thạc sĩ",
     "trinh_do_ly_luan_chinh_tri": "Cao cấp",
-    "check_up": false
+    "check_up": true
   },
   {
     "ma_dai_bieu": "DN.012",
@@ -177,7 +177,7 @@
     "Chuc_vu_chinh_quyen": "Lãnh đạo phòng, khoa và tương đương",
     "trinh_do_chuyen_mon": "Tiến sĩ",
     "trinh_do_ly_luan_chinh_tri": "Cao cấp",
-    "check_up": false
+    "check_up": true
   },
   {
     "ma_dai_bieu": "DN.013",
@@ -192,7 +192,7 @@
     "Chuc_vu_chinh_quyen": "Lãnh đạo phòng, khoa và tương đương",
     "trinh_do_chuyen_mon": "Đại học",
     "trinh_do_ly_luan_chinh_tri": "Cao cấp",
-    "check_up": false
+    "check_up": true
   },
   {
     "ma_dai_bieu": "DN.014",
@@ -207,7 +207,7 @@
     "Chuc_vu_chinh_quyen": "Lãnh đạo phòng, khoa và tương đương",
     "trinh_do_chuyen_mon": "Đại học",
     "trinh_do_ly_luan_chinh_tri": "Trung cấp",
-    "check_up": false
+    "check_up": true
   },
   {
     "ma_dai_bieu": "CT.015",
@@ -252,7 +252,7 @@
     "Chuc_vu_chinh_quyen": "Lãnh đạo phòng, khoa và tương đương",
     "trinh_do_chuyen_mon": "Tiến sĩ",
     "trinh_do_ly_luan_chinh_tri": "Cao cấp",
-    "check_up": true
+    "check_up": false
   },
   {
     "ma_dai_bieu": "CT.018",
@@ -282,7 +282,7 @@
     "Chuc_vu_chinh_quyen": "Lãnh đạo phòng, khoa và tương đương",
     "trinh_do_chuyen_mon": "Tiến sĩ",
     "trinh_do_ly_luan_chinh_tri": "Trung cấp",
-    "check_up": true
+    "check_up": false
   },
   {
     "ma_dai_bieu": "CT.020",
@@ -672,7 +672,7 @@
     "Chuc_vu_chinh_quyen": "Không",
     "trinh_do_chuyen_mon": "Tiến sĩ",
     "trinh_do_ly_luan_chinh_tri": "Trung cấp",
-    "check_up": true
+    "check_up": false
   },
   {
     "ma_dai_bieu": "CT.046",
@@ -747,7 +747,7 @@
     "Chuc_vu_chinh_quyen": "Lãnh đạo phòng, khoa và tương đương",
     "trinh_do_chuyen_mon": "Thạc sĩ",
     "trinh_do_ly_luan_chinh_tri": "Trung cấp",
-    "check_up": false
+    "check_up": true
   },
   {
     "ma_dai_bieu": "CT.051",

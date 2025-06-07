@@ -135,7 +135,15 @@
     function searchPerson() {
       const query = document.getElementById("searchInput").value.trim().toLowerCase();
       const resultDiv = document.getElementById("search_daibieu");
-      resultDiv.innerHTML = ""; // Xóa kết quả cũ
+      resultDiv.innerHTML = "";
+
+      // ✅ Đồng bộ trạng thái check từ bảng
+      document.querySelectorAll("#danhSach tbody tr").forEach(row => {
+        const ma = row.cells[0].textContent.trim();
+        const isChecked = row.cells[4].textContent.trim() === "✔️";
+        const index = allData.findIndex(p => p.ma_dai_bieu === ma);
+        if (index !== -1) allData[index].check_up = isChecked;
+      });
 
       if (!query) {
         resultDiv.innerHTML = "<p>Vui lòng nhập tên hoặc mã đại biểu.</p>";
@@ -181,7 +189,7 @@
               <p style="flex: 1 1 45%; margin: 3px 0;"><strong>Chức vụ chính quyền:</strong> ${p.Chuc_vu_chinh_quyen}</p>
               <p style="flex: 1 1 45%; margin: 3px 0;"><strong>Trình độ chuyên môn:</strong> ${p.trinh_do_chuyen_mon}</p>
               <p style="flex: 1 1 45%; margin: 3px 0;"><strong>Trình độ lý luận chính trị:</strong> ${p.trinh_do_ly_luan_chinh_tri}</p>
-              <p style="flex: 1 1 45%; margin: 3px 0;"><strong>Check-up:</strong> ${p.check_up ? "✔️" : "❌"}</p>
+              <p style="flex: 1 1 45%; margin: 3px 0;"><strong>Check-up:</strong> ${allData.find(a => a.ma_dai_bieu === p.ma_dai_bieu)?.check_up ? "✔️" : "❌"}</p>
             </div>
             <div style="text-align: center; margin-top: 20px;">
               ${buttonHtml}
@@ -216,7 +224,10 @@
   .then(result => {
     if (result.success) {
       // ✅ Cập nhật trạng thái trong allData
-      person.check_up = newCheck;
+      const index = allData.findIndex(p => p.ma_dai_bieu === ma_dai_bieu);
+      if (index !== -1) {
+        allData[index].check_up = newCheck;
+      }
 
       // ✅ Cập nhật lại phần tìm kiếm
       searchPerson();
@@ -237,9 +248,7 @@
         }
       });
 
-
       showImage(person.ho_va_ten, person.file_hinh);
-
     } else {
       alert("Lỗi khi cập nhật: " + result.error);
     }
@@ -250,27 +259,41 @@
   });
 }
 
-    function resetDiemDanh() {
-  const confirmReset = confirm("Bạn có chắc muốn reset tất cả điểm danh về mặc định ❌?");
+  function resetDiemDanh() {
+  const password = prompt("Vui lòng nhập mật khẩu để xác nhận reset điểm danh:");
+  if (!password) {
+    alert("Đã hủy thao tác.");
+    return;
+  }
+
+  const correctPassword = "hcmue@123";  
+
+  if (password !== correctPassword) {
+    alert("Sai mật khẩu. Không thực hiện reset.");
+    return;
+  }
+
+  const confirmReset = confirm("Bạn có chắc chắn muốn reset tất cả điểm danh về ❌?");
   if (!confirmReset) return;
 
   fetch("https://haitlc.pythonanywhere.com/api/reset_check", {
     method: "POST"
   })
-  .then(res => res.json())
-  .then(result => {
-    if (result.success) {
-      alert("Đã reset điểm danh.");
-      location.reload(); // Tải lại trang để cập nhật
-    } else {
-      alert("Lỗi khi reset: " + result.error);
-    }
-  })
-  .catch(err => {
-    console.error("Lỗi kết nối:", err);
-    alert("Không thể kết nối tới server.");
-  });
+    .then(res => res.json())
+    .then(result => {
+      if (result.success) {
+        alert("Đã reset điểm danh.");
+        location.reload();
+      } else {
+        alert("Lỗi khi reset: " + result.error);
+      }
+    })
+    .catch(err => {
+      console.error("Lỗi kết nối:", err);
+      alert("Không thể kết nối tới server.");
+    });
 }
+
     function exportVang() {
   fetch("https://haitlc.pythonanywhere.com/api/export_vang", {
     method: "GET"
@@ -314,6 +337,16 @@ function handleSearch(event) {
   event.preventDefault();  // chặn reload trang
   searchPerson();
 }
+
+  function updateFromServer() {
+    fetch("./static/dai_bieu_updated.json")
+      .then(res => res.json())
+      .then(data => {
+        allData = data;
+      });
+  }
+
+  setInterval(updateFromServer, 3000);
 
   </script>
 </head>

@@ -3,6 +3,7 @@ from flask_cors import CORS
 import json
 import os
 import io
+import pdfkit
 from datetime import datetime
 from collections import Counter
 from dateutil.relativedelta import relativedelta
@@ -194,18 +195,25 @@ def generate_summary():
             p {{
                 margin-top: 10px;
             }}
+
+            .export-btn {{
+                padding: 10px 20px;
+                background-color: #2a4d9b;
+                color: white;
+                border: none;
+                border-radius: 6px;
+                font-size: 16px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }}
+
+            .export-btn:hover {{
+                background-color: #1a3570;
+            }}
         </style>
     </head>
     <body>
         <h1>THỐNG KÊ PHIÊN 1<br>ĐẠI HỘI ĐẠI BIỂU XVI</br></h1>
-
-        <div style="text-align: right; margin-bottom: 10px;">
-        <form action="/api/export_wrapup" method="get">
-            <button type="submit" style="padding: 8px 12px; background-color: #2a4d9b; color: white; border: none; border-radius: 4px;">
-            Xuất phiếu thống kê
-            </button>
-        </form>
-        </div>
 
         <h2 style="color: #b22222; font-size: 20px;">
             Tổng số đại biểu đã điểm danh: {checked_count} / {total_count} ({ratio_present})
@@ -248,6 +256,18 @@ def generate_summary():
         <h2>Tuổi Đảng</h2>
         <p>Đồng chí có tuổi Đảng cao nhất: <strong>{max_party_age[0]}</strong> ({max_party_age[1].years} năm {max_party_age[1].months} tháng {max_party_age[1].days} ngày)</p>
         <p>Đồng chí có tuổi Đảng thấp nhất: <strong>{min_party_age[0]}</strong> ({min_party_age[1].years} năm {min_party_age[1].months} tháng {min_party_age[1].days} ngày)</p>
+    
+        <div style="text-align: center; margin-top: 40px;">
+            <form action="/api/export_wrapup_pdf" method="get">
+                <button type="submit" class="export-btn">Xuất phiếu thống kê</button>
+            </form>
+        </div>
+
+        <script>
+            setInterval(() => {{
+                location.reload();
+            }}, 10000); 
+        </script>
     </body>
     </html>
     """
@@ -404,19 +424,26 @@ def export_comat():
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
 
-@app.route("/api/export_wrapup", methods=["GET"])
-def export_wrapup_file():
+@app.route("/api/export_wrapup_pdf", methods=["GET"])
+def export_wrapup_pdf():
     try:
         wrapup_path = os.path.join("static", "wrapup.html")
+        pdf_path = os.path.join("static", "wrapup.pdf")
+
+        # Thay đường dẫn dưới bằng đúng nơi cài wkhtmltopdf.exe của bạn
+        config = pdfkit.configuration(wkhtmltopdf=r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe')
+
+        # Tạo PDF từ HTML
+        pdfkit.from_file(wrapup_path, pdf_path, configuration=config)
+
         return send_file(
-            wrapup_path,
+            pdf_path,
             as_attachment=True,
-            download_name="DHXVI_phieu_thong_ke.html",
-            mimetype="text/html"
+            download_name="DHXVI_phieu_thong_ke.pdf",
+            mimetype="application/pdf"
         )
     except Exception as e:
         return jsonify(success=False, error=str(e)), 500
-
 
 if __name__ == '__main__':
     app.run(debug=True)
