@@ -1,0 +1,182 @@
+
+    <!DOCTYPE html>
+    <html lang="vi">
+    <head>
+        <meta charset="UTF-8">
+        <title>Thống kê Đại hội XVI</title>
+        <link rel="icon" type="image/png" href="./static/images/logo_hcmue.ico">
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                max-width: 900px;
+                margin: auto;
+                padding: 20px;
+                background-color: #f9f9f9;
+            }
+            h1 {
+                text-align: center;
+                color: #2a4d9b;
+            }
+            h2 {
+                margin-top: 40px;
+                color: #1a3e6e;
+                border-bottom: 2px solid #ccc;
+                padding-bottom: 5px;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 10px;
+            }
+            th, td {
+                border: 1px solid #ccc;
+                padding: 8px 12px;
+                text-align: left;
+            }
+            thead {
+                background-color: #e6f0ff;
+            }
+            .highlight {
+                font-size: 20px;
+                font-weight: bold;
+                color: #b22222;
+                margin-top: 10px;
+            }
+            p {
+                margin-top: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>THỐNG KÊ PHIÊN 1<br>ĐẠI HỘI ĐẠI BIỂU XVI</br></h1>
+
+        <div style="text-align: right; margin-bottom: 10px;">
+        <form action="/api/export_wrapup" method="get">
+            <button type="submit" style="padding: 8px 12px; background-color: #2a4d9b; color: white; border: none; border-radius: 4px;">
+            Xuất phiếu thống kê
+            </button>
+        </form>
+        </div>
+
+        <h2 style="color: #b22222; font-size: 20px;">
+            Tổng số đại biểu đã điểm danh: 2 / 107 (1.9%)
+        </h2>
+
+        <h2>Giới tính</h2>
+        <ul>
+            
+        <table border="1" cellspacing="0" cellpadding="6" style="width:100%; border-collapse: collapse; margin-bottom: 20px;">
+            <thead style="background-color:#dbe9f7;">
+                <tr>
+                    <th>Nhóm</th>
+                    <th style="text-align:center">Số lượng</th>
+                    <th style="text-align:center">Tỉ lệ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Nam</td><td style='text-align:center'>1</td><td style='text-align:center'>50.0%</td></tr><tr><td>Nữ</td><td style='text-align:center'>1</td><td style='text-align:center'>50.0%</td></tr>
+            </tbody>
+        </table>
+        
+        </ul>
+
+        <h2>Chức vụ Đảng</h2>
+        <ul>
+            
+        <table border="1" cellspacing="0" cellpadding="6" style="width:100%; border-collapse: collapse; margin-bottom: 20px;">
+            <thead style="background-color:#dbe9f7;">
+                <tr>
+                    <th>Nhóm</th>
+                    <th style="text-align:center">Số lượng</th>
+                    <th style="text-align:center">Tỉ lệ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Ủy viên Ban Chấp hành Đảng bộ</td><td style='text-align:center'>1</td><td style='text-align:center'>50.0%</td></tr><tr><td>Cấp ủy các chi bộ trực thuộc</td><td style='text-align:center'>1</td><td style='text-align:center'>50.0%</td></tr><tr><td>Không</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr>
+            </tbody>
+        </table>
+        
+        </ul>
+
+        <h2>Chức vụ Chính quyền</h2>
+        <ul>
+            
+        <table border="1" cellspacing="0" cellpadding="6" style="width:100%; border-collapse: collapse; margin-bottom: 20px;">
+            <thead style="background-color:#dbe9f7;">
+                <tr>
+                    <th>Nhóm</th>
+                    <th style="text-align:center">Số lượng</th>
+                    <th style="text-align:center">Tỉ lệ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Lãnh đạo trường</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr><tr><td>Lãnh đạo phòng, khoa và tương đương</td><td style='text-align:center'>2</td><td style='text-align:center'>100.0%</td></tr><tr><td>Không</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr>
+            </tbody>
+        </table>
+        
+        </ul>
+
+        <h2>Trình độ chuyên môn</h2>
+        <ul>
+            
+        <table border="1" cellspacing="0" cellpadding="6" style="width:100%; border-collapse: collapse; margin-bottom: 20px;">
+            <thead style="background-color:#dbe9f7;">
+                <tr>
+                    <th>Nhóm</th>
+                    <th style="text-align:center">Số lượng</th>
+                    <th style="text-align:center">Tỉ lệ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Sinh viên</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr><tr><td>Đại học</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr><tr><td>Thạc sĩ</td><td style='text-align:center'>1</td><td style='text-align:center'>50.0%</td></tr><tr><td>Tiến sĩ</td><td style='text-align:center'>1</td><td style='text-align:center'>50.0%</td></tr><tr><td>Phó Giáo sư, Tiến sĩ</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr><tr><td>Giáo sư, Tiến sĩ</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr>
+            </tbody>
+        </table>
+        
+        </ul>
+
+        <h2>Trình độ lý luận chính trị</h2>
+        <ul>
+            
+        <table border="1" cellspacing="0" cellpadding="6" style="width:100%; border-collapse: collapse; margin-bottom: 20px;">
+            <thead style="background-color:#dbe9f7;">
+                <tr>
+                    <th>Nhóm</th>
+                    <th style="text-align:center">Số lượng</th>
+                    <th style="text-align:center">Tỉ lệ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Cao cấp</td><td style='text-align:center'>1</td><td style='text-align:center'>50.0%</td></tr><tr><td>Trung cấp</td><td style='text-align:center'>1</td><td style='text-align:center'>50.0%</td></tr><tr><td>Đang học Trung cấp</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr><tr><td>Chưa qua đào tạo</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr>
+            </tbody>
+        </table>
+        
+        </ul>
+
+        <h2>Thống kê theo nhóm tuổi</h2>
+        <ul>
+            
+        <table border="1" cellspacing="0" cellpadding="6" style="width:100%; border-collapse: collapse; margin-bottom: 20px;">
+            <thead style="background-color:#dbe9f7;">
+                <tr>
+                    <th>Nhóm</th>
+                    <th style="text-align:center">Số lượng</th>
+                    <th style="text-align:center">Tỉ lệ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Dưới 40 tuổi</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr><tr><td>Từ 40 đến 50 tuổi</td><td style='text-align:center'>2</td><td style='text-align:center'>100.0%</td></tr><tr><td>Từ 51 đến 60 tuổi</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr><tr><td>Trên 60 tuổi</td><td style='text-align:center'>0</td><td style='text-align:center'>0.0%</td></tr>
+            </tbody>
+        </table>
+        
+        </ul>
+
+        <h2>Tuổi đời</h2>
+        <p>Đồng chí lớn tuổi nhất: <strong>Nguyễn Ngọc Hưng</strong> (43 năm 9 tháng 6 ngày)</p>
+        <p>Đồng chí trẻ tuổi nhất: <strong>Phạm Thị Thu Thủy</strong> (41 năm 5 tháng 30 ngày)</p>
+
+        <h2>Tuổi Đảng</h2>
+        <p>Đồng chí có tuổi Đảng cao nhất: <strong>Nguyễn Ngọc Hưng</strong> (18 năm 6 tháng 5 ngày)</p>
+        <p>Đồng chí có tuổi Đảng thấp nhất: <strong>Phạm Thị Thu Thủy</strong> (16 năm 5 tháng 8 ngày)</p>
+    </body>
+    </html>
+    

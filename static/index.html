@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Điểm danh Đại hội XVI</title>
+  <link rel="icon" type="image/png" href="./static/images/logo_hcmue.ico">
+  <style>
+      thead th {
+      background-color: #2a4d9b;  /* màu xanh dương đậm */
+      color: white;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      padding: 8px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+    button {
+      padding: 5px 10px;
+    }
+    .reset-btn {
+      background-color: #f8d7da;
+      border: 1px solid #dc3545;
+      color: black;
+    }
+
+    .vang-btn {
+      background-color: #fff3cd;
+      border: 1px solid #ffc107;
+      color: black;
+    }
+
+    .comat-btn {
+      background-color: #d4edda;
+      border: 1px solid #28a745;
+      color: black;
+    }
+
+    .reset-btn:hover,
+    .vang-btn:hover,
+    .comat-btn:hover {
+      filter: brightness(0.95);
+      cursor: pointer;
+    }
+  </style>
+  <script>
+    const Diemdanh = []; // Mảng lưu mã, tên và chi bộ đã điểm danh
+    let allData = [];
+    fetch("./static/dai_bieu_updated.json")
+      .then(res => res.json())
+      .then(data => {
+        allData = data; // 👈 Lưu lại để dùng cho tìm kiếm
+      });
+    function showImage(name, filePath) {
+      const data = { name, file: filePath, time: Date.now() };
+      localStorage.setItem("displayImage", JSON.stringify(data));
+    }
+    function toggleCheck(person, button, checkCell) {
+      const newCheckUp = !person.check_up;
+
+      fetch("http://localhost:5000/api/update_check", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          ma_dai_bieu: person.ma_dai_bieu,
+          check_up: newCheckUp
+        })
+      })
+      .then(res => res.json())
+      .then(result => {
+        if (result.success) {
+          // Cập nhật trạng thái trên client
+          person.check_up = newCheckUp;
+          checkCell.textContent = newCheckUp ? "✔️" : "❌";
+          button.textContent = newCheckUp ? "Hủy điểm danh" : "Điểm danh";
+          showImage(person.ho_va_ten, person.file_hinh);
+        } else {
+          alert("Lỗi khi cập nhật: " + result.error);
+        }
+      })
+      .catch(err => {
+        console.error("Lỗi kết nối tới server:", err);
+        alert("Không thể kết nối tới server.");
+      });
+    }
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch("./static/dai_bieu_updated.json")
+        .then(res => res.json())
+        .then(data => {
+          // console.log("Dữ liệu đã tải:", data);
+          const tbody = document.querySelector("#danhSach tbody");
+          data.forEach(person => {
+            //person.check_up = false; // mặc định ban đầu là chưa điểm danh
+
+            const row = document.createElement("tr");
+
+            const checkCell = document.createElement("td");
+            if(person.check_up) checkCell.textContent = "✔️";
+            else checkCell.textContent = "❌";
+
+            const button = document.createElement("button");
+            if (person.check_up) button.textContent = "Hủy điểm danh";
+            else button.textContent = "Điểm danh";
+            button.onclick = () => toggleCheck(person, button, checkCell);
+
+            row.innerHTML = `
+              <td>${person.ma_dai_bieu}</td>
+              <td>${person.ho_va_ten}</td>
+              <td>${person.chi_bo}</td>
+              <td>${person.gioi}</td>
+            `;
+            row.appendChild(checkCell);
+
+            const imgCell = document.createElement("td");
+            const imgButton = document.createElement("button");
+            imgButton.textContent = "Hiển thị ảnh";
+            imgButton.onclick = () => showImage(person.ho_va_ten, person.file_hinh);
+            imgCell.appendChild(imgButton);
+            row.appendChild(imgCell);
+
+            const diemDanhCell = document.createElement("td");
+            diemDanhCell.appendChild(button);
+            row.appendChild(diemDanhCell);
+
+            tbody.appendChild(row);
+          });
+        })
+        .catch(err => console.error("Lỗi tải dữ liệu:", err));
+    });
+    function searchPerson() {
+      const query = document.getElementById("searchInput").value.trim().toLowerCase();
+      const resultDiv = document.getElementById("search_daibieu");
+      resultDiv.innerHTML = ""; // Xóa kết quả cũ
+
+      if (!query) {
+        resultDiv.innerHTML = "<p>Vui lòng nhập tên hoặc mã đại biểu.</p>";
+        return;
+      }
+
+      const matches = allData.filter(p =>
+        p.ma_dai_bieu.toLowerCase().includes(query) ||
+        p.ho_va_ten.toLowerCase().includes(query)
+      );
+
+      if (matches.length === 0) {
+        resultDiv.innerHTML = "<p>Không tìm thấy đại biểu.</p>";
+        return;
+      }
+
+      // Hiển thị kết quả
+      matches.forEach(p => {
+        const buttonLabel = p.check_up ? "Hủy điểm danh" : "Điểm danh";
+        const buttonHtml = `<button onclick="toggleCheckBySearch('${p.ma_dai_bieu}')">${buttonLabel}</button>`;
+
+        const bgColor = p.check_up ? "#e6ffe6" : "#fff";  // xanh nhạt nếu đã điểm danh
+
+        const html = `
+          <div style="
+            background: ${bgColor};
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            font-size: 15px;
+          ">
+            <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+              <p style="flex: 1 1 45%; margin: 3px 0;"><strong>Mã đại biểu:</strong> ${p.ma_dai_bieu}</p>
+              <p style="flex: 1 1 45%; margin: 3px 0;"><strong>Họ và tên:</strong> ${p.ho_va_ten}</p>
+              <p style="flex: 1 1 45%; margin: 3px 0;"><strong>Chi bộ:</strong> ${p.chi_bo}</p>
+              <p style="flex: 1 1 45%; margin: 3px 0;"><strong>Giới:</strong> ${p.gioi}</p>
+              <p style="flex: 1 1 45%; margin: 3px 0;"><strong>Ngày sinh:</strong> ${p.ngay_sinh}</p>
+              <p style="flex: 1 1 45%; margin: 3px 0;"><strong>Ngày dự bị:</strong> ${p.ngay_du_bi}</p>
+              <p style="flex: 1 1 45%; margin: 3px 0;"><strong>Chức vụ đảng:</strong> ${p.Chuc_vu_dang}</p>
+              <p style="flex: 1 1 45%; margin: 3px 0;"><strong>Chức vụ chính quyền:</strong> ${p.Chuc_vu_chinh_quyen}</p>
+              <p style="flex: 1 1 45%; margin: 3px 0;"><strong>Trình độ chuyên môn:</strong> ${p.trinh_do_chuyen_mon}</p>
+              <p style="flex: 1 1 45%; margin: 3px 0;"><strong>Trình độ lý luận chính trị:</strong> ${p.trinh_do_ly_luan_chinh_tri}</p>
+              <p style="flex: 1 1 45%; margin: 3px 0;"><strong>Check-up:</strong> ${p.check_up ? "✔️" : "❌"}</p>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+              ${buttonHtml}
+            </div>
+          </div>
+        `;
+
+
+        resultDiv.innerHTML += html;
+      });
+    }
+  function toggleCheckBySearch(ma_dai_bieu) {
+  const person = allData.find(p => p.ma_dai_bieu === ma_dai_bieu);
+  if (!person) {
+    alert("Không tìm thấy đại biểu.");
+    return;
+  }
+
+  const newCheck = !person.check_up;
+
+  fetch("http://localhost:5000/api/update_check", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      ma_dai_bieu: person.ma_dai_bieu,
+      check_up: newCheck
+    })
+  })
+  .then(res => res.json())
+  .then(result => {
+    if (result.success) {
+      // ✅ Cập nhật trạng thái trong allData
+      person.check_up = newCheck;
+
+      // ✅ Cập nhật lại phần tìm kiếm
+      searchPerson();
+
+      // ✅ Cập nhật lại dòng tương ứng trong bảng (nếu có)
+      const rows = document.querySelectorAll("#danhSach tbody tr");
+      rows.forEach(row => {
+        const cellMa = row.cells[0]?.textContent.trim();
+        if (cellMa === ma_dai_bieu) {
+          // Cập nhật trạng thái check
+          row.cells[4].textContent = newCheck ? "✔️" : "❌";
+
+          // Cập nhật nút điểm danh (nút thứ 2, sau "Hiển thị ảnh")
+          const buttons = row.querySelectorAll("button");
+          if (buttons.length >= 2) {
+            buttons[1].textContent = newCheck ? "Hủy điểm danh" : "Điểm danh";
+          }
+        }
+      });
+
+
+      showImage(person.ho_va_ten, person.file_hinh);
+
+    } else {
+      alert("Lỗi khi cập nhật: " + result.error);
+    }
+  })
+  .catch(err => {
+    console.error("Lỗi khi gửi yêu cầu:", err);
+    alert("Không thể kết nối tới server.");
+  });
+}
+
+    function resetDiemDanh() {
+  const confirmReset = confirm("Bạn có chắc muốn reset tất cả điểm danh về mặc định ❌?");
+  if (!confirmReset) return;
+
+  fetch("http://localhost:5000/api/reset_check", {
+    method: "POST"
+  })
+  .then(res => res.json())
+  .then(result => {
+    if (result.success) {
+      alert("Đã reset điểm danh.");
+      location.reload(); // Tải lại trang để cập nhật
+    } else {
+      alert("Lỗi khi reset: " + result.error);
+    }
+  })
+  .catch(err => {
+    console.error("Lỗi kết nối:", err);
+    alert("Không thể kết nối tới server.");
+  });
+}
+    function exportVang() {
+  fetch("http://localhost:5000/api/export_vang", {
+    method: "GET"
+  })
+  .then(res => res.blob())
+  .then(blob => {
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "DHXVI_danh_sach_vang_mat.xlsx";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  })
+  .catch(err => {
+    console.error("Lỗi khi tải file:", err);
+    alert("Không thể tạo hoặc tải file.");
+  });
+}
+    function exportComat() {
+  fetch("http://localhost:5000/api/export_comat", {
+    method: "GET"
+  })
+  .then(res => res.blob())
+  .then(blob => {
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "DHXVI_danh_sach_co_mat.xlsx.xlsx";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  })
+  .catch(err => {
+    console.error("Lỗi khi tải file:", err);
+    alert("Không thể tạo hoặc tải file.");
+  });
+}
+
+function handleSearch(event) {
+  event.preventDefault();  // chặn reload trang
+  searchPerson();
+}
+
+  </script>
+</head>
+<body style="font-family: Arial, sans-serif;">
+  <div style="text-align: center; margin-top: 30px; margin-bottom: 20px;">
+    <div style="font-size: 28px; font-weight: bold; color: #0d4d91; margin-bottom: 10px;">
+      ĐIỂM DANH PHIÊN 1
+    </div>
+    <div style="font-size: 20px; font-weight: bold; color: #0d4d91; line-height: 1.5;">
+      ĐẠI HỘI ĐẠI BIỂU ĐẢNG BỘ TRƯỜNG ĐẠI HỌC SƯ PHẠM THÀNH PHỐ HỒ CHÍ MINH<br>
+      LẦN THỨ XVI - NHIỆM KÌ 2025 - 2027
+    </div>
+  </div>
+
+  <div style="max-width: 1200px; margin: auto; padding: 20px;">
+    <!-- Khung tìm kiếm -->
+    <form id="searchForm" onsubmit="handleSearch(event)" style="display: flex; gap: 10px; margin-bottom: 15px;">
+      <input type="text" id="searchInput" placeholder="Nhập mã đại biểu hoặc họ tên" style="flex: 1; padding: 8px;">
+      <button type="submit" style="background-color: #0d4d91; color: white; border: none; padding: 8px 16px;">Tìm kiếm</button>
+    </form>
+
+
+
+    <!-- Kết quả tìm kiếm -->
+    <div id="search_daibieu" style="margin-bottom: 30px;"></div>
+
+    <!-- Bảng danh sách -->
+    <table id="danhSach">
+      <thead>
+        <tr>
+          <th>Mã đại biểu</th>
+          <th>Họ và tên</th>
+          <th>Chi bộ</th>
+          <th>Giới</th>
+          <th>Check In</th>
+          <th>Hiển thị ảnh</th> 
+          <th>Điểm danh</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- JavaScript sẽ chèn dữ liệu tại đây -->
+      </tbody>
+    </table>
+        <!-- Nhóm các nút chức năng -->
+    <div style="margin-top: 30px; display: flex; gap: 10px; justify-content: center;">
+      <button onclick="resetDiemDanh()" class="reset-btn">Reset Điểm danh</button>
+      <button onclick="exportVang()" class="vang-btn">Xuất file đại biểu vắng</button>
+      <button onclick="exportComat()" class="comat-btn">Xuất file đại biểu có mặt</button>
+    </div>
+  </div>
+</body>
+</html>
